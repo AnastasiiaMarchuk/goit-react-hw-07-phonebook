@@ -52,7 +52,7 @@ export const ContactList = () => {
           })}
         </List>
       )}
-      {!newList.length && <Message>{noContactsMessage}</Message>}
+      {!isLoading && !newList.length && <Message>{noContactsMessage}</Message>}
     </>
   );
 };
