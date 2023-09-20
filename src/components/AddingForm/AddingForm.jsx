@@ -5,7 +5,6 @@ import * as yup from 'yup';
 import { Form, Title } from './AddingForm.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { nanoid } from 'nanoid';
 import { useContacts } from 'redux/hooks';
 
 const schema = yup
@@ -22,7 +21,7 @@ const schema = yup
   .required();
 
 export default function AddingForm() {
-  const { addContact, contacts } = useContacts();
+  const { addNewContact, contacts } = useContacts();
 
   const {
     register,
@@ -47,8 +46,8 @@ export default function AddingForm() {
       return;
     }
 
-    const contact = { ...newContact, id: nanoid() };
-    addContact(contact);
+    const contact = { ...newContact };
+    addNewContact(contact);
 
     toast.success('Contact added successfully', {
       position: 'top-right',

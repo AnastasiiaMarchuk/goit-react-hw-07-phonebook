@@ -3,9 +3,16 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { List, Message, TitlesWrapper, Wrapper } from './ContactList.styled';
 import { useContacts, useFilter } from 'redux/hooks';
 
+import { useEffect } from 'react';
+
 export const ContactList = () => {
-  const { removeContact, contacts } = useContacts();
+  const { removeContact, contacts, getContacts, isLoading, error } =
+    useContacts();
   const { filter } = useFilter();
+
+  useEffect(() => {
+    getContacts();
+  }, [getContacts]);
 
   const onRemoveContact = contactId => {
     removeContact(contactId);
@@ -27,6 +34,7 @@ export const ContactList = () => {
         <p>Number</p>
       </TitlesWrapper>
       <Wrapper />
+      {isLoading && !error && <b>Request in progress...</b>}
       {newList.length > 0 && (
         <List>
           {newList.map(contact => {
