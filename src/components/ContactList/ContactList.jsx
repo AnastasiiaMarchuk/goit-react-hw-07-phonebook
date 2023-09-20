@@ -4,6 +4,7 @@ import { List, Message, TitlesWrapper, Wrapper } from './ContactList.styled';
 import { useContacts, useFilter } from 'redux/hooks';
 
 import { useEffect } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
   const { removeContact, contacts, getContacts, isLoading, error } =
@@ -34,7 +35,7 @@ export const ContactList = () => {
         <p>Number</p>
       </TitlesWrapper>
       <Wrapper />
-      {isLoading && !error && <b>Request in progress...</b>}
+      {isLoading && !error && <Loader />}
       {newList.length > 0 && (
         <List>
           {newList.map(contact => {
